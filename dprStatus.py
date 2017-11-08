@@ -5,7 +5,8 @@ from datetime import datetime
 
 """The purpose of the script is to generate a report of when was the time a DPR was updated."""
 
-monthDict = {"1":"Jan", "2":"Feb", "3":"Mar", "4":"Apr", "5":"May", "6":"Jun", "7":"Jul", "8":"Aug", "9":"Sep", "10":"Oct", "11":"Nov", "12":"Dec"}
+monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun",
+             "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}
 todayMonth = datetime.now().month
 todayMonth = monthDict[str(todayMonth)]
 todayDate = str(datetime.now().day)
@@ -32,6 +33,7 @@ for folder in dirs:  # For every DPR in the folder extract last modified time
                 fileList.append(file)
                 filepath = folderpath + "\\" + str(file)
                 catchTime = time.ctime(os.stat(filepath).st_mtime)
+
                 # When the date is in single digit
                 if catchTime[8] == " ":
                     catchTime = catchTime[:8] + "0" + catchTime[9:]
@@ -39,7 +41,7 @@ for folder in dirs:  # For every DPR in the folder extract last modified time
                     timeList.append(catchTime)
                     day = catchTime[8:10]
                     month = catchTime[4:7]
-                    if day != todayDate or  month != todayMonth:
+                    if day != todayDate or month != todayMonth:
                         catchFileList.append(str(file))
                         catchTimeList.append(catchTime)
 

@@ -1,4 +1,4 @@
-# This script does sizing calculation for elevators
+# This script performs traffic analysis for elevators
 
 # Variables
 n = 22  # Integer. Number of floors above terminal

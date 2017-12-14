@@ -5,39 +5,84 @@ n = 22  # Integer. Number of floors above terminal
 cap = 8  # Integer. Lift capacity in terms of persons
 ratedSpeed = 1.75  # Meters per second
 avgFloorHeight = 3  # Meters
-l = 3  # Number of lifts in a single group
+lifts = 3  # Number of lifts in a single group
 
 # Assumptions
-tp = 5  # Seconds. Average period of time required for a single passenger to enter or leave the lift car
-tc = 5  # Seconds. Time period measured from the instant that car doors start to close until the doors are locked
-to = 5  # Seconds. Time period measured from the instant that car doors start to open until they are open 800 mm
-tf = 3  # Seconds. Time period measured from the instant that car doors are locked until the lift is level at the next adjacent floor
+"""Average period of time required for a single passenger to enter
+or leave the lift car in seconds.
+"""
+tp = 5
+
+"""Time period measured from the instant that car
+doors start to close until the doors are locked in seconds.
+"""
+tc = 5
+
+"""Time period measured from the instant that car
+doors start to open until they are open 800 mm in seconds."""
+to = 5
+
+"""Time period measured from the instant that car doors
+are locked until the lift is level at the next adjacent floor in seconds"""
+tf = 3
 
 # Calculated Items
-# Where 5 is the number of occupants in a dwelling unit including floating staff.
-pop = (21 * 4 * 7)
-p = 0.8 * cap  # Float. Average passenger carried
-# Seconds. Period of time required to transit two adjacent floors at rated speed
+"""Where 5 is the number of occupants in a dwelling unit
+including floating staff."""
+occupants = 7
+pop = (21 * 4 * occupants)
+
+"""Average passengers carried"""
+p = 0.8 * cap
+
+"""Period of time required to transit two adjacent floors
+at rated speed in seconds"""
 tv = avgFloorHeight / ratedSpeed
-t = (tc + to) + tf  # Seconds. Time period measured from the instant that car doors start to close to the instant that the car doors are open 800 mm at the next adjacent floor
+
+"""Time period measured from the instant that car doors start
+to close to the instant that the
+car doors are open 800 mm at the
+next adjacent floor in seconds"""
+t = (tc + to) + tf
 
 
-def elevatorSizing(n, cap, ratedSpeed, avgFloorHeight, p, tv, t, tp, l, pop, className):
-    """This function calculates round trip time, waiting interval, and handling capacity"""
+def elevatorSizing(n, cap, ratedSpeed,
+                   avgFloorHeight, p, tv, t, tp, l, pop, className):
+    """
+    This function calculates;
+    round trip time,
+    waiting interval,
+    and
+    handling capacity
+    """
     print("***********Variables & Assumptions***********")
     print("Number of floor above terminal are = {}".format(n))
     print("Elevator capacity in terms of persons is = {}".format(cap))
-    print("Average elevator capacity in terms of persons carried is = {}".format(p))
+    print("Average elevator capacity " +
+          " in terms of persons carried is = {}".format(p))
     print("Rated speed of elevator is = {} m/s".format(ratedSpeed))
     print("Average floor height is = {} meters".format(avgFloorHeight))
     print("Number of elevators in a single group are = {}".format(l))
-    print("Average period of time required for a single passenger to enter or leave the lift car is = {} seconds".format(tp))
+    print("Average period of time required for a single passenger" +
+          "to enter or leave the lift car is = {} seconds".format(tp))
     print("Population per towers is = {} persons".format(pop))
-    print("Time period measured from the instant that car doors start to close until the doors are locked is = {} seconds".format(tc))
-    print("Time period measured from the instant that car doors start to open until they are open 800 mm is = {} seconds".format(to))
-    print("Time period measured from the instant that car doors are locked until the lift is level at the next adjacent floor is = {} seconds".format(tf))
-    print("Time period required to transit two adjacent floors at rated speed is = {} seconds".format(round(tv, 2)))
-    print("Time period measured from the instant that car doors start to close to the instant that the car doors are open 800 mm at the next adjacent floor is = {} seconds".format(t))
+    print("Time period measured from the instant that" +
+          "car doors start to close" +
+          "until the doors are locked is = {} seconds".format(tc))
+    print("Time period measured from the instant " +
+          "that car doors start to open until " +
+          " they are open 800 mm is = {} seconds".format(to))
+    print("Time period measured from the instant that car doors " +
+          "are locked until the lift is level at " +
+          "the next adjacent floor is = {} seconds".format(tf))
+    print("Time period required to transit " +
+          "two adjacent floors " +
+          "at rated speed is = {} seconds".format(round(tv, 2)))
+    print("Time period measured from the" +
+          "instant that car doors start to close" +
+          "to the instant that the car" +
+          "doors are open 800 mm at" +
+          "the next adjacent floor is = {} seconds".format(t))
 
     print(" " * 2)
     print("***********Calculation Results***********")
@@ -59,24 +104,14 @@ def elevatorSizing(n, cap, ratedSpeed, avgFloorHeight, p, tv, t, tp, l, pop, cla
 
     # Calculating INT
     interval = rtt / l
-    print("The period between successive car arrivals is = {} seconds".format(round(interval, 2)))
+    print("The period between successive " +
+          "car arrivals is = {} seconds".format(round(interval, 2)))
 
     # Calculating Handling capacity
     hc = (300 * p * l * (100 / pop)) / rtt
-    print("Handling capacity for this selection is = {} %".format(round(hc, 2)))
-
-    # hc = 6.78
-    # # Checking range
-    # classOfBuilding = className
-    # if classOfBuilding == "high-end":
-    #     hcRange = [item*0.01 for item in range(8,100)]
-    # if classOfBuilding == "mid-end":
-    #     hcRange = [item*0.01 for item in range(6,8)]
-    # if classOfBuilding == "low-end":
-    #     hcRange = [item*0.01 for item in range(5,7)]
-    #
-    # print (hcRange)
-    # print (hc in hcRange)
+    print("Handling capacity for " +
+          "this selection is = {} %".format(round(hc, 2)))
 
 
-elevatorSizing(n, cap, ratedSpeed, avgFloorHeight, p, tv, t, tp, l, pop, "mid-end")
+elevatorSizing(n, cap, ratedSpeed, avgFloorHeight,
+               p, tv, t, tp, lifts, pop, "mid-end")

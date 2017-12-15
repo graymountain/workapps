@@ -3,10 +3,14 @@ import os
 import time
 from datetime import datetime
 
-"""The purpose of the script is to generate a report of when was the time a DPR was updated."""
+"""The purpose of the script is to" +
+"generate a report of when was the time a DPR was updated."""
 
-monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun",
-             "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}
+monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr",
+             "5": "May", "6": "Jun",
+             "7": "Jul", "8": "Aug",
+             "9": "Sep", "10": "Oct",
+             "11": "Nov", "12": "Dec"}
 todayMonth = datetime.now().month
 todayMonth = monthDict[str(todayMonth)]
 todayDate = str(datetime.now().day)
@@ -79,7 +83,8 @@ try:
     f = open(csvPath, "w")
     # Header for the file
     updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    f.write("This is an auto generated DPR update report. It shows when was a DPR last updated." + "\n")
+    f.write("This is an auto generated DPR update report." +
+            "It shows when was a DPR last updated." + "\n")
     f.write("This report was last generated on " + updateTime + "\n")
     f.write(endLine + "\n")
     f.write("Developed By : MSA R & D" + "\n")

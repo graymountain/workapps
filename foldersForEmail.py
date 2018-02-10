@@ -1,4 +1,4 @@
-"""A scrpt for file grouping and folder creation for limited size emailing by Devang """
+"""A scrpt for file grouping and folder creation for limited size emailing"""
 
 """
 Emailing to someone is an integral part of our lives. In most mdern day workplaces, email
@@ -13,9 +13,6 @@ It goes like this.
 import os
 import os.path
 import shutil
-
-
-
 
 
 def CheckPath(Path):
@@ -44,7 +41,7 @@ def StripPath(Path):
     Input(Path) = The original folder path
     Return = The path stripped of quotes
     """
-    
+
     if '"' in Path:
         Path = Path.strip('"')
         return Path
@@ -83,7 +80,7 @@ def ReturnMailSize(MailSizeLimit):
         print "It's either too small or too big. Try someting in the range of 1 and 10 the next time we relaunch."
         print "\n"*5
         return Launch()
-    
+
     # Checing if user input is less than 1
     # If you are making folders for attachments, 1 MB seems like a good minimum value.
     if float(Number) < 1 :
@@ -91,7 +88,7 @@ def ReturnMailSize(MailSizeLimit):
         print "Hey, that's a bit too small for an email attachment size."
         print "Please choose a  MailSizeLiimit of at least 1 mb the next time we launch."
         print "\n"*5
-        return Launch()  
+        return Launch()
 
     # Ideal email size shall not be greater than 10 as per Wikipedia article in the code
     if float(Number) > 11:
@@ -101,7 +98,7 @@ def ReturnMailSize(MailSizeLimit):
         print "Please choose MailSizeLiimit less than 10mbs next time we launch."
         print "\n"*5
         return Launch()
-    
+
     # Allowing certain user inpus
     if float(Number) < 11 or float(Number) == 1 or float(Number) == 10 :
         return float(Number)
@@ -113,7 +110,7 @@ def CheckDir(Path):
     """
     Makiing list of all the folders in the selected folder
     """
-    
+
     DirCount = 0
     DirList = []
 
@@ -127,14 +124,14 @@ def CheckDir(Path):
 
 
 def GetFileSize(Path):
-    
+
     """
     Returns file size in MBs
     Input(Path) = String
     Return = Float
-    
+
     """
-    
+
     Size = os.path.getsize(Path)
     return round(float(Size)/1048576, 2)
 
@@ -149,7 +146,7 @@ def PrintSize(Path, dirs):
     Return = Float
 
     """
-    
+
     i = 0
     Total = 0
     while i < len(dirs):
@@ -166,7 +163,7 @@ def MinimumFileSize(Path, dirs):
     Returns the file size of smallest file
     in the folder
     """
-    
+
     i = 0
     Total = []
     while i < len(dirs):
@@ -186,7 +183,7 @@ def TrimList(dirs, SelectGroup):
     Return = List
 
     """
-    
+
     if len(dirs) > 0:
         for item in SelectGroup:
             dirs.remove(item)
@@ -212,7 +209,7 @@ def Updatedirs(Path, dirs, MailSizeLimit):
     from the list
 
     """
-    
+
     i = 0
     TotalSize = 0
     SelectGroup = []
@@ -226,13 +223,13 @@ def Updatedirs(Path, dirs, MailSizeLimit):
             SelectGroup.append(dirs[i])
         else:
             TotalSize = TotalSize
-            
+
         # Very important to exit the loop
         if MailSizeLimit - TotalSize == 0.01:
             break
         else:
             i += 1
-            
+
     # Trimming selected files from the list
     dirs = TrimList(dirs, SelectGroup)
 
@@ -275,7 +272,7 @@ def SeparateFiles(Path, dirs, MailSizeLimit):
             # This is very important. The list(dirs) is being updated after everytime
             # Seclected files are removed from the list
             dirs = Data[2]
-            
+
             j += 1
 
     return [FinalOutput, j]
@@ -309,7 +306,7 @@ def MoveFiles(SampleList, Count, Path):
     Nothing fancy here.
 
     """
-    
+
     for item in SampleList:
         src = Path + '\\' + item
         dst = Path + '\\' + "Mail-" + str(Count)
@@ -323,7 +320,7 @@ def MoveAllFiles(Finallist, Path):
     Migrating all the selected files to folders that we have created
     This variable Finallist is defined inside FileSizeScan function
     that is defined below.
-    
+
     """
 
     # Retriving the last value from Finallist.
@@ -349,7 +346,7 @@ def MoveRemainigFiles(Finallist, dirs, Path):
     if there are any
 
     """
-    
+
     FolderCount = int(Finallist[-1])
 
     # Making an extra forlder
@@ -375,7 +372,7 @@ def MoveBakFiles(Subdir, LocalPath):
     Output = Shifting of Files
 
     """
-    
+
     for item in Subdir:
         src = LocalPath + '\\' + item
         dst = Path
@@ -398,14 +395,14 @@ def MoveBakAllFiles(Path, dirs):
 
     # Returns a list of all the files in this directory
     dirs = os.listdir(Path)
-    
+
     Count = 0
     for item in dirs:
 
         # If they are folder created through this process, they out to have nnumerical endings.
         if item[-1] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
             Count += 1
-    
+
     i = 1
     while i < Count + 1:
 
@@ -414,12 +411,12 @@ def MoveBakAllFiles(Path, dirs):
 
         # Gettiing list of each mail folder for supplying the same to MoveBakFiles function
         Subdir = os.listdir(LocalPath)
-        
+
         MoveBakFiles(Subdir, LocalPath)
 
         # Removing the empty folder
         os.rmdir(LocalPath)
-        
+
         i += 1
 
 
@@ -437,7 +434,7 @@ def AskToMoveBak(Path):
             print "Alright. Since you are not happy, we will relaunch so that you can change MailSizeLimit or move LargeFiles out of the folder."
             print "\n"*5
 
-            # Extracting name of all the folders present in the path selected 
+            # Extracting name of all the folders present in the path selected
             NameOfFolders = CheckDir(Path)[0]
             # Cunting the number of folders in the path selected
             NumberOfFolders = CheckDir(Path)[1]
@@ -590,7 +587,7 @@ def InitialCheckEmptyDir(SubPath, NameOfFolders):
     """ Checks if all the directories in the folder are empty.
     Input(SubPath) = Defined in Launch()
     Input(NameOfFolders) = Defined in this ReturnDirs"""
-    
+
     for item in NameOfFolders:
         LocalPath = SubPath + '\\' + item
 
@@ -599,7 +596,7 @@ def InitialCheckEmptyDir(SubPath, NameOfFolders):
 
         # If the list is empty, delete the folder
         if ListOfFiles == []:
-            os.rmdir(LocalPath)  
+            os.rmdir(LocalPath)
 
 
 
@@ -611,13 +608,13 @@ def ReturnDirs(Path, SubPath, NameOfFolders):
     Input(Path) = Location of Folder
     Input(SubPath) = Defined in Launch()
     Input(NameOfFolders) = Defined in this function"""
-    
+
     while True:
         NameOfFolders = CheckDir(Path)[0]
 
         #Move all the files to the main folder
         InitialMoveFiles(Path, SubPath, NameOfFolders)
-        
+
         # Delete all the folders
         InitialCheckEmptyDir(SubPath, NameOfFolders)
 
@@ -627,7 +624,7 @@ def ReturnDirs(Path, SubPath, NameOfFolders):
         # if no folders left, return the files list(dirs)
         if Check == []:
             return os.listdir(Path)
-        
+
          # Update the folder list
         else:
             NameOfFolders = CheckDir(Path)[0]
@@ -651,7 +648,7 @@ def Launch():
     """
 
     while True:
-        
+
         print " "
         # Prerequisites for this code to work
         Announcement01 = """*** Hi There! Program is successfully launched *** \n."""
@@ -673,13 +670,13 @@ or else if you want to exit, Enter E >>> ")
 
         # If user input is valid, go on
         elif CheckPath(Path) == True:
-            
+
             if Path.lower() == "e":
                 break
             else:
                 Path = StripPath(Path)
                 print " "
-    
+
                 # Extracting name of all the folders present in the path selected
                 NameOfFolders = CheckDir(Path)[0]
 
@@ -695,7 +692,7 @@ or else if you want to exit, Enter E >>> ")
                     # Calling ReturnDirs function on all the Subpaths
                     for SubPath in PathList:
                         PlaceHolder = ReturnDirs(Path, SubPath, NameOfFolders)
-                        
+
                     # Returns a list of all the files in this directory
                     dirs = PlaceHolder
 
@@ -704,29 +701,20 @@ or else if you want to exit, Enter E >>> ")
                     # Returns a list of all the files in this directory
                     dirs = os.listdir(Path)
 
-                    
+
                 # Maximum size of email you want to shoot
                 MailSizeLimit = raw_input("Mention maximum size limit for an email in MBs here. Try something in the range of 1 to 10 mbs. >>> ")
                 MailSizeLimit = ReturnMailSize(MailSizeLimit)
-                print " "                    
-                
+                print " "
+
                 # Return is inportant here. Otherwise False will not be received here
                 return FileSizeScan(Path, dirs, MailSizeLimit)
 
                 # Just to break out of the loop
                 if FileSizeScan(Path, dirs, MailSizeLimit) == False:
-                    break                    
+                    break
 
 
 
 
 Launch()
-
-
-
-
-
-
-
-
-

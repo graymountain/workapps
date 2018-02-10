@@ -7,6 +7,11 @@ import os
 path = "C:\Users\dchauhan\Desktop\New folder"
 filenames = os.listdir(path)
 for fileName in filenames:
+    # Adding prefix to a file
     rename.addPrefix(path, fileName, "RCD_SGS_")
+
+    # Adding suffix to a file
     # rename.addSuffixToFile(path, fileName, "_DCI COMMENTS")
+
+    # Adding suffix to a directory
     # rename.addSuffix(path, fileName, "_DCI COMMENTS")

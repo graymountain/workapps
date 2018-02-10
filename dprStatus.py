@@ -1,10 +1,9 @@
-#!/usr/bin/env python3.5
+"""The purpose of the script is to \
+generate a report of when was the time a DPR was updated."""
+
 import os
 import time
 from datetime import datetime
-
-"""The purpose of the script is to" +
-"generate a report of when was the time a DPR was updated."""
 
 monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr",
              "5": "May", "6": "Jun",
@@ -25,7 +24,7 @@ employeeCount = 0
 catchFileList = []
 catchTimeList = []
 
-path = r"Z:\DPR\2017"  # Path to the DPR folder
+path = r"Z:\DPR\2018"  # Path to the DPR folder
 dirs = os.listdir(path)
 for folder in dirs:  # For every DPR in the folder extract last modified time
     folderpath = path + "\\" + str(folder)
@@ -80,7 +79,7 @@ name = input("Please type your user name: ")
 # Path of Report file to be created
 try:
     csvPath = r"C:\Users\{}\Desktop\DPR Update Status.csv".format(name)
-    f = open(csvPath, "w")
+    f = open(csvPath, "w+")
     # Header for the file
     updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     f.write("This is an auto generated DPR update report." +

@@ -5,8 +5,10 @@ import string
 
 def removeDashAndSheetName(path, fileName):
     """
-    This function replaces '-' with '_' and \
-    removes sheet names from the file names.
+    This function replaces '-' with '_' \
+    removes sheet names from the file names. \
+    replaces sheet number. For instance S1 becomes Sheet 01 \
+    and so forth.
     Args:
         path: An absolute path to the directory on your system \
                 where you want this operation to happen.

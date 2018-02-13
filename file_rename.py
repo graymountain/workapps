@@ -1,5 +1,6 @@
 """This module contains some file / directory renaming methods"""
 import os
+import string
 
 
 def removeDashAndSheetName(path, fileName):
@@ -14,13 +15,27 @@ def removeDashAndSheetName(path, fileName):
     """
     oldName = os.path.join(path, fileName)
     newFileName = fileName.replace("-", "_")
-    sheetSizes = ["A0", "A1", "A2", "A3", "A4"]
-    for sheet in sheetSizes:
-        if sheet in fileName:
-            newFileName = newFileName[3:]
-            print "Sheet names removed"
 
-    newName = os.path.join(path, newFileName)
+    sheetSizes = ["A0", "A1", "A2", "A3", "A4"]
+    startOFFile = fileName[:2]
+    if startOFFile in sheetSizes:
+        newFileName = newFileName[3:]
+        print "Sheet names removed"
+
+    sheetNumbers = {"S1": "Sheet 01",
+                    "S2": "Sheet 02",
+                    "S3": "Sheet 03",
+                    "S4": "Sheet 04",
+                    "S5": "Sheet 05"}
+    endOfFile = newFileName.split(".")[0][-2:]
+    if endOfFile in sheetNumbers.keys():
+        revisedFileName = string.replace(newFileName,
+                                         endOfFile, sheetNumbers[endOfFile])
+        print "Sheet number changed"
+    else:
+        revisedFileName = newFileName
+
+    newName = os.path.join(path, revisedFileName)
     os.rename(oldName, newName)
 
 

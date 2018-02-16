@@ -4,7 +4,6 @@ other files and execute them."""
 import file_rename as rename
 import os
 
-
 path = "C:\Users\dchauhan\Desktop\New folder"
 filenames = os.listdir(path)
 for fileName in filenames:
@@ -18,3 +17,7 @@ for fileName in filenames:
 
     # Adding suffix to a directory
     # rename.addSuffix(path, fileName, "_DCI COMMENTS")
+
+f = open("test.txt", "w+")
+f.write("This is nonsense")
+f.close()

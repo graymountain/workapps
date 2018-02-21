@@ -16,7 +16,11 @@ def removeDashAndSheetName(path, fileName):
                 directory where this operation happens.
     """
     oldName = os.path.join(path, fileName)
-    newFileName = fileName.replace("-", "_")
+    if "-" in fileName:
+        newFileName = fileName.replace("-", "_")
+        print "Dashes removed from the file name"
+    else:
+        newFileName = fileName
 
     sheetSizes = ["A0", "A1", "A2", "A3", "A4"]
     startOFFile = fileName[:2]

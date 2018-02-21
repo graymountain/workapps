@@ -17,7 +17,3 @@ for fileName in filenames:
 
     # Adding suffix to a directory
     # rename.addSuffix(path, fileName, "_DCI COMMENTS")
-
-f = open("test.txt", "w+")
-f.write("This is nonsense")
-f.close()

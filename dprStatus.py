@@ -1,9 +1,11 @@
-"""The purpose of the script is to \
+"""The purpose of the script is to
 generate a report of when was the time a DPR was updated."""
 
 import os
 import time
 from datetime import datetime
+dpr_filePath = "Z:\DPR\\2018"
+os.chdir(dpr_filePath)
 
 monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr",
              "5": "May", "6": "Jun",
@@ -24,15 +26,14 @@ employeeCount = 0
 catchFileList = []
 catchTimeList = []
 
-path = r"Z:\DPR\2018"  # Path to the DPR folder
-dirs = os.listdir(path)
+dirs = os.listdir(dpr_filePath)
 for folder in dirs:  # For every DPR in the folder extract last modified time
-    folderpath = path + "\\" + str(folder)
+    folderpath = dpr_filePath + "\\" + str(folder)
     if os.path.isdir(folderpath):
         employeeCount += 1
         files = os.listdir(folderpath)
         for file in files:
-            if str(file)[0] != "~" and "DPR_2017" in str(file):
+            if str(file)[0] != "~" and "DPR_2018" in str(file):
                 fileList.append(file)
                 filepath = folderpath + "\\" + str(file)
                 catchTime = time.ctime(os.stat(filepath).st_mtime)
@@ -78,7 +79,8 @@ name = input("Please type your user name: ")
 
 # Path of Report file to be created
 try:
-    csvPath = r"C:\Users\{}\Desktop\DPR Update Status.csv".format(name)
+    print "This is happening"
+    csvPath = "C:\Users\{}\Desktop\DPR Update Status.csv".format(name)
     f = open(csvPath, "w+")
     # Header for the file
     updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))

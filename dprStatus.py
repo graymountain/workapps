@@ -112,3 +112,5 @@ try:
                   str(e))
 except Exception as e:
     print "An exception occured. {}".format(e)
+
+input("Press ENTER to exit")

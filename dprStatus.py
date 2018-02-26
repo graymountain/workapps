@@ -1,5 +1,5 @@
 """The purpose of the script is to
-generate a report of when was the time a DPR was updated."""
+generate a report of when was the last time a DPR was updated."""
 
 import os
 import time

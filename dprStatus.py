@@ -19,12 +19,13 @@ if len(todayDate) == 1:
     todayDate = "0" + todayDate
 
 
-fileList = []
-timeList = []
-employeeCount = 0
+fileList = []   # Catches the list of all the DPR fileList
+timeList = []   # Catches the last modified time stamp of all the DPR files
+employeeCount = 0   # The number of the employees
 
-catchFileList = []
-catchTimeList = []
+catchFileList = []  # Catches the files that are not updated
+catchTimeList = []  # Catches the last modified time
+# stamp for the files that are not updated
 
 dirs = os.listdir(dpr_filePath)
 for folder in dirs:  # For every DPR in the folder extract last modified time
@@ -75,34 +76,39 @@ else:
     endLine = "Someone has more than one copy of DPRs"
 
 # Take user input
-name = input("Please type your user name: ")
-
-# Path of Report file to be created
 try:
-    print "This is happening"
-    csvPath = "C:\Users\{}\Desktop\DPR Update Status.csv".format(name)
-    f = open(csvPath, "w+")
-    # Header for the file
-    updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    f.write("This is an auto generated DPR update report." +
-            "It shows when was a DPR last updated." + "\n")
-    f.write("This report was last generated on " + updateTime + "\n")
-    f.write(endLine + "\n")
-    f.write("Developed By : MSA R & D" + "\n")
-    f.write("\n")
-    # DPR report
-    for key in keyList:
-        line = key + "," + result[key]
-        f.write(line + "\n")
-    f.write("\n")
-    f.write("*******************************************************" + "\n")
-    f.write("\n")
-    f.write("An Email to be sent to following people \n")
-    f.write("\n")
-    for key in catchKeyList:
-        line = key + "," + catchResult[key]
-        f.write(line + "\n")
-    f.close()
-    print("File written successfully! Yeah!")
+    name = input("Please type your user name inside quotes: ")
+    if isinstance(name, str) is True:
+        # Path of Report file to be created
+        try:
+            csvPath = "C:\Users\{}\Desktop\DPR Update Status.csv".format(name)
+            f = open(csvPath, "w+")
+            # Header for the file
+            updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            f.write("This is an auto generated DPR update report." +
+                    "It shows when was a DPR last updated." + "\n")
+            f.write("This report was last generated on " + updateTime + "\n")
+            f.write(endLine + "\n")
+            f.write("Developed By : MSA R & D" + "\n")
+            f.write("\n")
+            # DPR report
+            for key in keyList:
+                line = key + "," + result[key]
+                f.write(line + "\n")
+            f.write("\n")
+            f.write("*******************************************************" +
+                    "\n")
+            f.write("\n")
+            f.write("An Email to be sent to following people \n")
+            f.write("\n")
+            for key in catchKeyList:
+                line = key + "," + catchResult[key]
+                f.write(line + "\n")
+            f.close()
+            print("File written successfully! Yeah!")
+        except Exception as e:
+            print("\n" +
+                  "Something went wrong! File was not written!" + "\n" +
+                  str(e))
 except Exception as e:
-    print("\n" + "Something is wrong! File was not written!" + "\n" + str(e))
+    print "An exception occured. {}".format(e)

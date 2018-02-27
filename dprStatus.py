@@ -113,6 +113,7 @@ try:
                   "Something went wrong! File was not written!" + "\n" +
                   str(e))
 except Exception as e:
-    print "An exception occured. {}".format(e)
+    print ("Either something is wrong with the username input" +
+           " or the path of the DPR folder {}".format(e))
 
 input("Press ENTER to exit")    # To stop the CMD from closing automatically

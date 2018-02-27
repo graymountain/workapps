@@ -1,10 +1,11 @@
 """The purpose of the script is to
-generate a report of when was the last time a DPR was updated."""
+generate a CSV report of when was the last time a DPR was updated."""
 
 import os
 import time
 from datetime import datetime
-dpr_filePath = "Z:\DPR\\2018"
+
+dpr_filePath = "Z:\DPR\\2018"   # Path for DPR files
 os.chdir(dpr_filePath)
 
 monthDict = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr",
@@ -28,7 +29,8 @@ catchTimeList = []  # Catches the last modified time
 # stamp for the files that are not updated
 
 dirs = os.listdir(dpr_filePath)
-for folder in dirs:  # For every DPR in the folder extract last modified time
+for folder in dirs:
+    # For every DPR file in the folder extract last modified time
     folderpath = dpr_filePath + "\\" + str(folder)
     if os.path.isdir(folderpath):
         employeeCount += 1
@@ -113,4 +115,4 @@ try:
 except Exception as e:
     print "An exception occured. {}".format(e)
 
-input("Press ENTER to exit")
+input("Press ENTER to exit")    # To stop the CMD from closing automatically

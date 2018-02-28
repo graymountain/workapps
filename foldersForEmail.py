@@ -11,7 +11,6 @@ It goes like this.
 """
 
 import os
-import os.path
 import shutil
 
 

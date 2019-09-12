@@ -69,15 +69,17 @@ catchKeyList = catchResult.keys()
 catchKeyList = sorted(catchKeyList)
 
 # Error Report
-if employeeCount == len(keyList):
-    endLine = "All employees are accounted for"
-else:
-    endLine = "Someone has more than one copy of DPRs"
 
+nameList = (", ".join(files)) #Create a list out of array in simple text form
+
+if "~" or "Autosaved" in nameList:
+    endLine = "Some DPRs are not named properly Or May have multiple files of a user"
+else:
+    endLine = "All DPRs are set properly"
 
 # Path of Report file to be created
 try:
-    csvPath = r"\\192.168.1.100\f$\DPR Status\DPR Update Status.csv"
+    csvPath = r"\\192.168.1.100\msi\DPR Status\DPR Update Status.csv"
     f = open(csvPath, "w")
     # Header for the file
     updateTime = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
